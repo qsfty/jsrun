@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "minqiang.li"
+  },
+  "dependencies": {
+    "art-template": "^3.0.3",
+    "bluebird": "^3.3.5",
+    "body-parser": "~1.13.2",
+    "express": "^4.13.4",
+    "gm": "^1.23.0",
+    "mdate": "1.0.1",
+    "memory-cache": "^0.1.5",
+    "mjax": "1.0.2",
+    "mprint": "1.0.5",
+    "mstr": "1.0.2",
+    "mvalidate": "1.0.9",
+    "mysql": "^2.10.2",
+    "natis": "1.0.1",
+    "xmldoc": "^0.4.0"
+  },
+  "description": "a tool to generate code",
+  "devDependencies": {},
+  "directories": {},
+  "keywords": [
+    "autogeneratecode",
+    "automakecode",
+    "codegenerate",
+    "codemaker",
+    "generatecode",
+    "makecode"
+  ],
+  "license": "ISC",
+  "main": "app.js",
+  "name": "Amo",
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,73 @@
+<!-- 列表 -->
+<div id="page_list">
+    <section class="search_section">
+        <div class="search_item">
+            <select  id="splatform_id" class="myselect select2" name="platform_id" placeholder="请选择"></select>
+        </div>
+        <input type="text" class="minput" name="name" id="keyword" placeholder="检索"/>
+        <span id="sSubmit" class="mbtn">搜索</span>
+        <span class="mbtn obtn" style="float:right" id="aBtn">添加</span>
+    </section>
+    <table border="0" id="table_list" class="table">
+        <thead>
+            <th>名称</th>
+            <th>分组</th>
+            <th>版本号</th>
+            <th>类型</th>
+            <th>CDN地址</th>
+        <th>操作</th>
+        </thead>
+        <tbody id="lists">
+        </tbody>
+    </table>
+    <div id="pagination">
+        <div class="mypage" id="mypage"></div>
+    </div>
+</div>
+<!-- 添加或编辑 -->
+<div id="page_add">
+    <a id="bClose" class="mbtn">×</a>
+    <form id="aForm">
+        <input type="hidden" name="id" />
+        <div class="form_line">
+            <label>名称</label>
+            <select  id="catalog" class="myselect select2" name="catalog" placeholder="请选择"></select>
+        </div>
+        <div class="form_line">
+            <label>版本号</label>
+            <input type="text" class="minput" name="version"/>
+        </div>
+        <div class="form_line">
+            <label>类型</label>
+            <select  id="type" class="myselect select2" name="type" placeholder="请选择">
+                <option value=""></option>
+                <option value="JS">JS</option>
+                <option value="CSS">CSS</option>
+            </select>
+        </div>
+        <div class="form_line">
+            <label>CDN地址</label>
+            <input type="text" class="minput" name="link"/>
+        </div>
+    </form>
+    <div class="form_line">
+        <a class="mbtn" id="aSubmit">提交</a>
+    </div>
+</div>
+<!-- 模板 -->
+<script id="temp_model_list" type="text/html">
+    [[each models as model]]
+    <tr>
+            <td>[[model.name]]</td>
+            <td>[[model.tag]]</td>
+            <td>[[model.version]]</td>
+            <td>[[model.type]]</td>
+            <td>[[model.link]]</td>
+        <td>
+            <a data-id="[[model.id]]" class="item_update smobtn">更新</a>
+            <a data-id="[[model.id]]" class="item_delete smobtn">删除</a>
+        </td>
+    </tr>
+    [[/each]]
+</script>
+<script type="text/javascript" src="/js/admin/plugin.js"></script>

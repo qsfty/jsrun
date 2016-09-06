@@ -1,0 +1,217 @@
+body {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-family: Monaco, Menlo, Consolas, "helvetica neue", "Microsoft YaHei", arial, sans-serif;
+	background: #FFF;
+	a {
+		text-decoration: none;
+        cursor: pointer;
+        color: #ccd0d8;
+	}
+}
+
+body,ul,ol,blockquote,h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding: 0;
+}
+
+
+.hidden {
+	display: none;
+}
+
+ul, ol, blockquote {
+	margin: 0;
+	padding: 0;
+}
+
+#side_totop{
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 18px;
+    background: #f4f5f9;
+    color: #AAA;
+    border-radius: 17px;
+    font-weight: lighter;
+    cursor: pointer;
+    &:hover{
+        transform : translate(0 10px);
+        -webkit-transform : translate(0 10px);
+    }
+}
+
+// form表单样式
+/* 表单样式 */
+input,
+textarea,
+select {
+	outline: none;
+}
+
+select {
+	-webkit-appearance: none;
+	border: 1px solid #D4D3D4;
+}
+
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 50px #f4f5f9 inset;
+}
+
+input:-webkit-autofill:focus {
+	//background: #f4f5f9;
+	-webkit-box-shadow: 0 0 0px 50px #f4f5f9 inset;
+}
+
+.minput {
+	width: 200px;
+	height: 30px;
+	border: 1px solid #f4f5f9;
+
+	padding-left: 5px;
+	font-size: 12px;
+	border-radius: 2px;
+	margin-right: 20px;
+	background: #f4f5f9;
+	transition: 0.3s ease-in;
+	font-family: Monaco, Menlo, Consolas, "helvetica neue", "Microsoft YaHei", arial, sans-serif;
+
+	&:focus {
+		box-shadow: 2px 2px 2px 0.3px rgba(0, 0, 0, 0.3);
+	}
+
+	&[type='password']{
+		font-family:sans-serif
+	}
+}
+
+.mtextarea {
+	display: block;
+	width: 800px;
+	border: 1px solid #FFFFFF;
+	margin-left: 80px;
+	position: relative;
+	top: -20px;
+	height: 200px;
+	padding: 10px;
+	font-family: Consolas, "Microsoft YaHei";
+}
+
+.form_line {
+	margin-bottom: 30px;
+
+	label {
+		display: inline-block;
+		width: 130px;
+		color: #999;
+	}
+}
+
+.mbtn {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+	line-height: 32px;
+	background-color: #2ea5ff;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+/* 弹出层 */
+/* 表格样式 */
+
+
+table{
+    &.table{
+        background-color: #fff;
+        width: 100%;
+        border-collapse: collapse;
+        th{
+            font-weight: normal;
+            color: #666;
+            font-size: 15px;
+            height: 50px;
+            text-align: left;
+        }
+        tr {
+            height: 48px;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+            /*transition:background-color 1s;*/
+            th,td{
+                padding-left: 8px;
+            }
+            td{
+                .tinput{
+                    width:100px;
+                    margin-right: 2px;
+                    background-color: #FFF;
+                }
+            }
+            &:hover{
+                background-color: #FAFAFA;
+            }
+            &.child-line{
+                display: none;
+            }
+        }
+    }
+    &.table_window{
+		margin:30px;
+        tr{
+            height: 60px;
+            td{
+                font-size: 14px;
+                min-width: 100px;
+				&:nth-of-type(1){
+					color: #999;
+				}
+				img{
+					vertical-align: middle;
+					&.check_code{
+						position: relative;
+						left:-10px;
+						cursor: pointer;
+					}
+				}
+            }
+        }
+    }
+}
+
+%bg {
+	background: url('../img/bg.jpg');
+	width: 100%;
+	height: 500px;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	height: 100%;
+	z-index: -1;
+}
+
+//定义宽度
+$mwidth: 50 60 80 100 120 150 200 220 300 500;
+@each $w in $mwidth {
+	.w#{$w} {
+		width: #{$w}px
+	}
+}
+
+//定义高度
+$mheight: 15 20 50 60 80 100 120 150 200 300 500;
+@each $h in $mheight {
+	.h#{$h} {
+		height: #{$h}px
+	}
+}
+

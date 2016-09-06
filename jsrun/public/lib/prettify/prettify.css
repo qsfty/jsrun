@@ -1,0 +1,81 @@
+.pln {
+    color: #268bd2;
+}
+.str {
+    color: #2aa198;
+}
+.kwd {
+    color: #cb4b16;
+}
+.com {
+    color: #586175;
+    font-size:12px;
+    font-family: "Avenir Next",Avenir,"Helvetica Neue",Helvetica,"Lantinghei SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif;
+}
+.typ {
+    color: #b58900;
+}
+.lit {
+    color: #2aa198;
+}
+.pun {
+    color: #839496;
+}
+.opn {
+    color: #839496;
+}
+.clo {
+    color: #839496;
+}
+.tag {
+    color: #268bd2;
+}
+.atn {
+    color: #586175;
+}
+.atv {
+    color: #2aa198;
+}
+.dec {
+    color: #268bd2;
+}
+.var {
+    color: #268bd2;
+}
+.fun {
+    color: #ff0000;
+}
+/*pre{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}*/
+pre.prettyprint {
+    background-color: #042029;
+    background-color: #FAFAFA;
+    border: 1px solid #e1e1e8;
+    padding: 3px;
+    border: 1px solid #e1e1e8;
+    border-radius: 2px;
+    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace  !important;
+    font-size: 12px;
+    overflow: auto;
+    
+}
+#mycontent p{
+    font-family: "Avenir Next",Avenir,"Helvetica Neue",Helvetica,"Lantinghei SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif
+}
+ol.linenums {
+    color: #4c666c;
+    margin: 0;
+    list-style: none;
+    padding-left:0;
+    
+}
+ol.linenums span{
+    font-family: Consolas,Monaco,"Andale Mono",monospace;
+}
+ol.linenums li {
+    line-height: 18px;
+    padding-left: 12px;
+    text-wrap:unrestricted;
+}

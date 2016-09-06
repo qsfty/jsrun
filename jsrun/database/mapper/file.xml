@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="file">
+    <insert id="insert">
+        insert into
+            file(
+                name,
+                css,
+                js,
+                html,
+                ordinal,
+                catalog_id,
+                status,
+                user_id,
+                gmt_create,
+                gmt_update,
+                uuid
+            )
+        value(
+            {{name | q}},
+            {{css | q}},
+            {{js | q}},
+            {{html | q}},
+            {{ordinal | q}},
+            {{catalog_id | q}},
+            {{status | q}},
+            {{user_id | q}},
+            {{now | d}},
+            {{now | d}},
+            {{uuid | q}}
+        )
+    </insert>
+
+    <select id="isUnique">
+        select
+            count(1)
+        from
+            file
+        where
+            {{name | eq:'name'}}
+            {{id | and:'id','!='}}
+    </select>
+
+    <update id="update">
+        update
+            file
+        set
+            {{css | eq:'css',true}},
+            {{js | eq:'js',true}},
+            {{html | eq:'html',true}},
+            {{status | eq:'status',true}},
+            {{now | ed:'gmt_update'}}
+        where
+            {{uuid | eq:'uuid'}}
+    </update>
+
+    <update id="rename">
+        update
+            file
+        set
+            {{name | eq:'name'}}
+        where
+            {{uuid | eq:'uuid'}}
+    </update>
+
+    <update id="redogroup">
+        update
+            file
+        set
+            {{catalog_id | eq:'catalog_id'}}
+        where
+            {{uuid | eq:'uuid'}}
+    </update>
+
+    <select id="checkDelete">
+        select 
+            count(1)
+        from    
+            file
+        where
+            1 = 0
+    </select>
+
+    <delete id="delete" before="checkDelete">
+        delete from
+            file
+        where
+            {{uuid | eq:'uuid'}}
+    </delete>
+
+    <select id="pageQuery">
+        select
+            t1.*
+        from
+            file t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{css | and:'t1.css'}}
+            {{js | and:'t1.js'}}
+            {{html | and:'t1.html'}}
+            {{ordinal | and:'t1.ordinal'}}
+            {{catalog_id | and:'t1.catalog_id'}}
+            {{user_id | and:'t1.user_id'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{uuid | and:'t1.uuid'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            file t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{css | and:'t1.css'}}
+            {{js | and:'t1.js'}}
+            {{html | and:'t1.html'}}
+            {{ordinal | and:'t1.ordinal'}}
+            {{catalog_id | and:'t1.catalog_id'}}
+            {{user_id | and:'t1.user_id'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{uuid | and:'t1.uuid'}}
+    </select>
+
+    
+    <select id="listAll">
+        select
+            *
+        from
+            file
+    </select>
+
+
+    <select id="listBy">
+        select
+            *
+        from
+            file
+        where
+            1 = 1
+    </select>
+
+    
+    <select id="get">
+        select
+            *
+        from
+            file
+        where
+            {{uuid | eq:'uuid'}}
+    </select>
+
+
+</sql>

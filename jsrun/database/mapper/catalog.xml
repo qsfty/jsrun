@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="catalog">
+    <insert id="insert">
+        insert ignore into
+            catalog(
+                name,
+                pid,
+                gmt_create,
+                gmt_update,
+                user_id,
+                ordinal,
+                uuid
+            )
+        value(
+            {{name | q}},
+            {{pid | q}},
+            {{now | d}},
+            {{now | d}},
+            {{user_id | q}},
+            {{ordinal | q}},
+            {{uuid | q}}
+        )
+    </insert>
+
+    <select id="isUnique">
+        select
+            count(1)
+        from
+            catalog
+        where
+            {{name | eq:'name'}}
+            {{id | and:'id','!='}}
+    </select>
+
+    <update id="update">
+        update
+            catalog
+        set
+            {{name | eq:'name'}},
+            {{pid | eq:'pid'}},
+            {{now | ed:'gmt_create'}},
+            {{now | ed:'gmt_update'}},
+            {{user_id | eq:'user_id'}},
+            {{ordinal | eq:'ordinal'}},
+            {{uuid | eq:'uuid'}}
+        where
+            {{id | eq:'id'}}
+    </update>
+    
+    <update id="rename">
+        update
+            catalog
+        set
+            {{name | eq:'name',1}}
+        where
+            {{uuid | eq:'uuid'}}
+    </update>
+
+    <select id="checkDelete">
+        select 
+            count(1)
+        from    
+            catalog
+        where
+            1 = 0
+    </select>
+
+    <delete id="delete" before="checkDelete">
+        delete from
+            catalog
+        where
+            {{uuid | eq:'uuid'}}
+    </delete>
+
+    <select id="pageQuery">
+        select
+            t1.*
+        from
+            catalog t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{pid | and:'t1.pid'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{user_id | and:'t1.user_id'}}
+            {{ordinal | and:'t1.ordinal'}}
+            {{uuid | and:'t1.uuid'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            catalog t1
+        where
+            1 = 1
+            {{name | and:'t1.name'}}
+            {{pid | and:'t1.pid'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{user_id | and:'t1.user_id'}}
+            {{ordinal | and:'t1.ordinal'}}
+            {{uuid | and:'t1.uuid'}}
+    </select>
+
+    
+    <select id="listAll">
+        select
+            *
+        from
+            catalog
+    </select>
+
+
+    <select id="listBy">
+        select
+            *
+        from
+            catalog
+        where
+            1 = 1
+    </select>
+    
+    <select id="listSelect">
+        select
+            uuid id,name text
+        from
+            catalog
+        where
+            1 = 1
+            {{user_id | and:'user_id'}}
+            {{pid | and:'pid'}}
+    </select>
+
+
+    <select id="listMenu" child="file_id,file_name,file_ordinal" childName="files" childId="file_id" key="uuid">
+        select
+            t1.name,t1.uuid,t1.ordinal,t2.uuid file_id,t2.name file_name,t2.ordinal file_ordinal
+        from
+            catalog t1
+        left join
+            file t2
+        on t1.uuid = t2.catalog_id
+        where
+            {{user_id | eq:'t1.user_id'}}
+        order by
+            t1.ordinal asc,t2.ordinal asc
+    </select>
+    
+    <select id="get">
+        select
+            *
+        from
+            catalog
+        where
+            {{id | eq:'id'}}
+    </select>
+
+
+</sql>

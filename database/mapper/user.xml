@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql id="user">
+    <insert id="insert" before="isUnique">
+        insert into
+            user(
+                username,
+                password,
+                role,
+                gmt_create,
+                gmt_update,
+                uuid,
+                email,
+                name,
+                website,
+                job,
+                city
+            )
+        value(
+            {{username | q}},
+            {{password | q}},
+            {{role | q}},
+            {{now | d}},
+            {{now | d}},
+            {{uuid | q}},
+            {{email | q}},
+            {{name | q}},
+            {{website | q}},
+            {{job | q}},
+            {{city | q}}
+        )
+    </insert>
+
+    <select id="isUnique">
+        select
+            count(1)
+        from
+            user
+        where
+            {{username | eq:'username'}}
+    </select>
+
+    <update id="update">
+        update
+            user
+        set
+            {{username | eq:'username'}},
+            {{password | eq:'password'}},
+            {{role | eq:'role'}},
+            {{now | ed:'gmt_create'}},
+            {{now | ed:'gmt_update'}},
+            {{email | eq:'email'}},
+            {{name | eq:'name'}},
+            {{website | eq:'website'}},
+            {{job | eq:'job'}},
+            {{city | eq:'city'}}
+        where
+            {{id | eq:'id'}}
+    </update>
+
+    <select id="checkDelete">
+        select 
+            count(1)
+        from    
+            user
+        where
+            1 = 0
+    </select>
+
+    <delete id="delete" before="checkDelete">
+        delete from
+            user
+        where
+            {{id | eq:'id'}}
+    </delete>
+
+    <select id="pageQuery">
+        select
+            t1.*
+        from
+            user t1
+        where
+            1 = 1
+            {{username | and:'t1.username'}}
+            {{password | and:'t1.password'}}
+            {{role | and:'t1.role'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{email | and:'t1.email'}}
+            {{name | and:'t1.name'}}
+            {{website | and:'t1.website'}}
+            {{job | and:'t1.job'}}
+            {{city | and:'t1.city'}}
+            {{sort | orderBy}}
+            {{offset | limit:pageSize}}
+    </select>
+
+    <select id="pageCount">
+        select
+            count(1)
+        from
+            user t1
+        where
+            1 = 1
+            {{username | and:'t1.username'}}
+            {{password | and:'t1.password'}}
+            {{role | and:'t1.role'}}
+            {{gmt_create_start | and:'t1.gmt_create','gte'}}
+            {{gmt_create_end | and:'t1.gmt_create','lte'}}
+            {{gmt_update_start | and:'t1.gmt_update','gte'}}
+            {{gmt_update_end | and:'t1.gmt_update','lte'}}
+            {{email | and:'t1.email'}}
+            {{name | and:'t1.name'}}
+            {{website | and:'t1.website'}}
+            {{job | and:'t1.job'}}
+            {{city | and:'t1.city'}}
+    </select>
+
+    
+    <select id="listAll">
+        select
+            *
+        from
+            user
+    </select>
+
+
+    <select id="listBy">
+        select
+            *
+        from
+            user
+        where
+            1 = 1
+    </select>
+
+    
+    <select id="get">
+        select
+            *
+        from
+            user
+        where
+            {{id | eq:'id'}}
+    </select>
+
+    <select id="login">
+        select 
+            * 
+        from
+            user
+        where
+            {{username | eq:'username'}}
+            {{password | and:'password'}}
+    </select>
+
+     <insert id="regist" before="isUnique">
+        insert into
+            user(
+                username,
+                password,
+                gmt_create,
+                gmt_update,
+                uuid
+            )
+        value(
+            {{username | q}},
+            {{password | q}},
+            {{now | d}},
+            {{now | d}},
+            {{uuid | q}}
+        )
+    </insert>
+
+
+</sql>
