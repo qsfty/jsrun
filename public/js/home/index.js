@@ -134,13 +134,20 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
             return CodeMirrorObj.getHtmlCode() + CodeMirrorObj.getJsCode() + CodeMirrorObj.getCssCode()
         },
         checkSame : function(){
+            if(User.state == "unlogin"){
+                return;
+            }
+            if(CodeMirrorObj.oldData != CodeMirrorObj.getNow()){
+                Procode.save("leave");
+            }
+        },
 
-        }
     }
     function checkLeave(){
-        if(CodeMirrorObj.oldData != CodeMirrorObj.getNow()){
-            return "数据还未保存";
-        }
+        // if(CodeMirrorObj.oldData != CodeMirrorObj.getNow()){
+        //     return "数据还未保存";
+        // }
+        CodeMirrorObj.checkSame()
     }
     window.onbeforeunload = checkLeave;
     var Win = {
@@ -990,6 +997,8 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
             })
         },
         openFile: function(id) {
+            CodeMirrorObj.checkSame()
+
             util.post(Procode.urls.get_file, { "uuid": id }, function(data) {
                 CodeMirrorObj.setHtmlCode(data.html, true);
                 CodeMirrorObj.setCssCode(data.css);
@@ -1060,7 +1069,7 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
         getElementPosition: function(source, ele) {
             return source.toLowerCase().indexOf(ele.toLowerCase());
         },
-        save: function() {
+        save: function(arg) {
             var html = CodeMirrorObj.getHtmlCode(true);
             var css = CodeMirrorObj.getCssCode(true);
             var js = CodeMirrorObj.getJsCode(true);
@@ -1076,7 +1085,9 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
                 status : Win.views.join('.'),
                 uuid: Data.currentFileId
             }, function(e) {
-                $.success("保存成功");
+                if(typeof arg == "undefined"){
+                    $.success("保存成功");
+                }
                 CodeMirrorObj.saveOld()
             });
         },
@@ -1084,12 +1095,12 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
 
         }
     }
+    
+    CodeMirrorObj.init();
     Procode.init();
     Menu.initData(Data.currentFileId);
-    CodeMirrorObj.init();
     UIView.init();
     Movable.init();
-   
     User.initView();
 
     Key.bindKey('command+s,ctrl+s', function(e) {
