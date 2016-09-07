@@ -60,9 +60,9 @@
         select 
             count(1)
         from    
-            catalog
+            file
         where
-            1 = 0
+            {{uuid | eq:'catalog_id'}}
     </select>
 
     <delete id="delete" before="checkDelete">

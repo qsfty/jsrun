@@ -1,7 +1,10 @@
 module.exports = {
     user : {
-        delete:'该用户已经被关联',
+        check:'该用户已经被关联',
         unique:'该用户名已经存在'
+    },
+    catalog : {
+        check:'该分类下还有代码，无法删除'
     },
     template : {
         'catalog_id' : {
