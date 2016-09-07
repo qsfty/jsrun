@@ -1021,6 +1021,8 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
             }
 
             var headContent = Procode.getElement(source, "head");
+
+            headContent += '<style type="text/css">body{color:#ffcc99;font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}</style>';
             var bodyContent = Procode.getElement(source, "body");
 
             if(bodyContent == ""){
