@@ -125,9 +125,24 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
                 CodeMirrorObj.lst = l
                 Procode.run();
             }
+        },
+        oldData : null,
+        saveOld : function(){
+            CodeMirrorObj.oldData =  CodeMirrorObj.getNow()
+        },
+        getNow : function(){
+            return CodeMirrorObj.getHtmlCode() + CodeMirrorObj.getJsCode() + CodeMirrorObj.getCssCode()
+        },
+        checkSame : function(){
+
         }
     }
-
+    function checkLeave(){
+        if(CodeMirrorObj.oldData != CodeMirrorObj.getNow()){
+            return "数据还未保存";
+        }
+    }
+    window.onbeforeunload = checkLeave;
     var Win = {
         ltp: 0.5,
         rtp: 0.5,
@@ -987,6 +1002,7 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
                 Procode.run();
 
                 window.history.pushState({},0,'/code/'+id);
+                CodeMirrorObj.saveOld()
             })
         },
         run: function() {
@@ -1059,6 +1075,7 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
                 uuid: Data.currentFileId
             }, function(e) {
                 $.success("保存成功");
+                CodeMirrorObj.saveOld()
             });
         },
         fork: function() {
