@@ -28,7 +28,6 @@
         update
             plugin_catalog
         set
-            {{uuid | eq:'uuid'}},
             {{name | eq:'name'}},
             {{tag | eq:'tag'}}
         where

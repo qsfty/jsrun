@@ -121,7 +121,7 @@ require(['jquery', 'util', 'ui', 'mselect2', 'comjax', 'mtemplate', 'base64', 'k
         },
         realrun : function(){
             var l = new Date().getTime();
-            if(CodeMirrorObj.realtime && (l - CodeMirrorObj.lst > 3000)){
+            if(CodeMirrorObj.realtime && (l - CodeMirrorObj.lst > 1000)){
                 CodeMirrorObj.lst = l
                 Procode.run();
             }
